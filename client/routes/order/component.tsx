@@ -56,10 +56,6 @@ export default class Asset extends React.Component<Prop, State> {
     formRender() {
         if (this.state.step === 1) {
             return [
-                <AssetView
-                    key={0}
-                    asset={this.state.asset}
-                />,
                 <AssetForm
                     key={1}
                     submit={this.onSubmit}

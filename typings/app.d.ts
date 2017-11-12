@@ -1,6 +1,6 @@
 declare namespace IApp {
     export interface IAsset {
-        Id?: string;
+        Id?: any;
         Title: string;
         Owner: string;
         Value: number;

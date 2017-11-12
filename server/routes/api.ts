@@ -1,65 +1,28 @@
+import * as guid from 'guid';
+import {
+    saveAsset,
+    saveOrder,
+    getAsset,
+    setDecision,
+} from '../web3';
+
 export default (server) => {
     server.route({
         method: 'POST',
         path: '/api/addasset',
         config: {
             handler: (req, reply) => {
-                const asset = req.payload;
+                const raw = req.payload;
+                const asset = {
+                    Id: Math.round(Math.random()*100000),
+                    Title: raw.title,
+                    Owner: raw.owner,
+                    Value: raw.value,
+                    Status: 'done'
+                }
 
-                console.log(asset);
-
-                reply({
-                    Id: 'aaa',
-                })
-            },
-        },
-    });
-
-    server.route({
-        method: 'POST',
-        path: '/api/getasset',
-        config: {
-            handler: (req, reply) => {
-                const { id } = req.payload;
-
-                console.log(id);
-
-                reply({
-                    asset: {
-                        Id: id,
-                        ...{
-                            Title: "New object",
-                            Owner: "New name",
-                            Value: 110000101,
-                            Status: 'pending'
-                        }
-                    }, orders: [
-                        {
-                            Id: '121',
-                            ParentId: id,
-                            Title: "New object 1",
-                            Owner: "New name 1",
-                            Value: 110000101,
-                            Status: 'pending',   
-                        },
-                        {
-                            Id: '23425',
-                            ParentId: id,
-                            Title: "New object 2 ",
-                            Owner: "New name 3",
-                            Value: 345,
-                            Status: 'accepted',   
-                        },
-                        {
-                            Id: '456',
-                            ParentId: id,
-                            Title: "New object 545",
-                            Owner: "New name 343",
-                            Value: 4353,
-                            Status: 'discard',   
-                        }
-                    ]
-                })
+                saveAsset(asset);
+                reply(asset);
             },
         },
     });
@@ -70,9 +33,23 @@ export default (server) => {
         config: {
             handler: (req, reply) => {
                 const order = req.payload;
-                console.log(order);
+                order.Status = 'pending';
 
+                saveOrder(order);
                 reply('ok');
+            },
+        },
+    });
+
+    server.route({
+        method: 'POST',
+        path: '/api/getasset',
+        config: {
+            handler: (req, reply) => {
+                const { id } = req.payload;
+                const data = getAsset(id);
+
+                reply(data);
             },
         },
     });
@@ -82,7 +59,8 @@ export default (server) => {
         path: '/api/setdecision',
         config: {
             handler: (req, reply) => {
-                const decision = req.payload;
+                const payload = req.payload;
+                setDecision(payload.id, payload.decision);
 
                 reply('ok');
             },
