@@ -2,8 +2,50 @@ import * as React from 'react';
 import styled from 'styled-components';
 import { Button } from 'antd';
 
-export default class AssetView extends React.Component<{}, {}> {
+interface Props {
+    order: IApp.IOrder;
+    onDecision: (id, decision) => void;
+}
+
+export default class AssetView extends React.Component<Props, {}> {
+
+    handleDecision = (decision) => {
+        const { order, onDecision } = this.props;
+
+        onDecision(order.Id, decision);
+    }
+
+    getAction() {
+        const { order } = this.props;
+
+        if (order.Status === 'pending') {
+            let applyFn = this.handleDecision.bind(this, true);
+            let discardFn = this.handleDecision.bind(this, false);
+
+            return (
+                <Actions>
+                    <Button
+                        type="primary"
+                        shape="circle"
+                        icon="check"
+                        size="large"
+                        onClick={applyFn}
+                    />
+                    <Button
+                        type="primary"
+                        shape="circle"
+                        icon="close"
+                        size="large"
+                        onClick={discardFn}
+                    />
+                </Actions>
+            );
+        }
+    }
+
     render() {
+        const { order } = this.props;
+
         return (
             <Wrapper>
                 <Table>
@@ -13,39 +55,36 @@ export default class AssetView extends React.Component<{}, {}> {
                                 Status
                         </Name>
                             <Value>
-                                Pedning
-                        </Value>
+                                {order.Status}
+                            </Value>
                         </tr>
                         <tr>
                             <Name>
                                 Title
                         </Name>
                             <Value>
-                                Моя хатка с краю
-                        </Value>
+                                {order.Title}
+                            </Value>
                         </tr>
                         <tr>
                             <Name>
                                 Owner
                         </Name>
                             <Value>
-                                Васька
-                        </Value>
+                                {order.Owner}
+                            </Value>
                         </tr>
                         <tr>
                             <Name>
                                 Value
                         </Name>
                             <Value>
-                                100000
-                        </Value>
+                                {order.Value}
+                            </Value>
                         </tr>
                     </tbody>
                 </Table>
-                <Actions>
-                    <Button type="primary" shape="circle" icon="check" size="large" />
-                    <Button type="primary" shape="circle" icon="close" size="large" />
-                </Actions>
+                {this.getAction()}
             </Wrapper>
         );
     }

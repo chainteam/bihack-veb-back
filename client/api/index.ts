@@ -22,3 +22,9 @@ export const addAssetApi = (asset) => {
         });
 };
 
+export const setDecisionApi = ({ id, decision }) => {
+    return axois.post('/api/setdecision', { id, decision })
+        .then(response => {
+            return response.data;
+        });
+};
