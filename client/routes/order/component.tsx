@@ -4,7 +4,7 @@ import { Modal, Steps } from 'antd';
 const Step = Steps.Step;
 
 import Guid from './guid';
-import Form from './form';
+import { AssetForm, AssetView } from '../../components';
 
 interface Prop {
     saveAsset: (data) => Promise<any>;
@@ -47,18 +47,20 @@ export default class Asset extends React.Component<Prop, State> {
 
     formRender() {
         if (this.state.step === 1) {
-            return (
-                <Form
+            return [
+                <AssetView/>,
+                <AssetForm
                     submit={this.onSubmit}
-                />
-            )
+                />,
+            ]
         }
     }
 
     render() {
         return (
             <Wrapper>
-                <StepsStyled current={0}>
+                <Title>Add Order for Asset</Title>
+                <StepsStyled current={this.state.step}>
                     <Step title="Get Asset" description="Get Assets." />
                     <Step title="Create Order" description="Create Order." />
                 </StepsStyled>
@@ -75,8 +77,13 @@ const Wrapper = styled.div`
     margin: 50px auto;
 `;
 
-const StepsStyled = styled(Steps)`
-    margin-bottom: 50px;
+const StepsStyled = styled(Steps) `
+    margin-bottom: 30px;
+`;
+
+const Title = styled.h1`
+    margin-bottom: 30px;
+    color; #666;
 `;
 
 function info(guid) {

@@ -1,6 +1,8 @@
 import * as React from 'react';
 import styled from 'styled-components';
 import { NavLink } from 'react-router-dom';
+import { Icon } from 'antd';
+
 import { routes } from '../../models';
 
 export default class Shell extends React.Component<{}, {}> {
@@ -10,22 +12,34 @@ export default class Shell extends React.Component<{}, {}> {
                 <Link
                     to={routes.main}
                 >
-                    Главная
+                    <Icon 
+                        type="home"
+                        style={{ fontSize: 32, color: '#111' }}    
+                    />
                 </Link>
                 <Link
                     to={routes.decide}
                 >
-                    Приятние заявок
+                    <Icon 
+                        type="solution"
+                        style={{ fontSize: 32, color: '#111' }}    
+                    />
                 </Link>
                 <Link
                     to={routes.addobj}
                 >
-                    Добавить объект
+                    <Icon 
+                        type="inbox"
+                        style={{ fontSize: 32, color: '#111' }}    
+                    />
                 </Link>
                 <Link
                     to={routes.addorder}
                 >
-                    Добавить заявку
+                    <Icon 
+                        type="book"
+                        style={{ fontSize: 32, color: '#111' }}    
+                    />
                 </Link>
             </Wrapper>
         );
@@ -34,8 +48,12 @@ export default class Shell extends React.Component<{}, {}> {
 
 const Wrapper = styled.div`
     font-size: 1.4em;
+    width: 50px;
+    background: cadetblue;
 `;
 
 const Link = styled(NavLink)`
-
+    display: block;
+    margin-top: 15px;
+    margin-left: 8px;
 `;

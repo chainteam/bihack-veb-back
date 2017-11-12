@@ -1,16 +1,13 @@
-import * as React from 'react';
-import styled from 'styled-components';
+import { connect } from 'react-redux';
 
-export default class Decide extends React.Component<{}, {}> {
-    render() {
-        return (
-            <Wrapper>
-                Decide
-            </Wrapper>
-        );
-    }
-}
+import Comp from './component';
 
-const Wrapper = styled.div`
-    height: 100%;
-`;
+const mapStateToProps = (state) => ({
+
+})
+
+const mapDispatchToProps = (dispatch) => ({
+
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(Comp);

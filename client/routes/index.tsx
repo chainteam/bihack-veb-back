@@ -11,6 +11,7 @@ import Asset from './asset';
 import Shell from './shell';
 import Decide from './decide';
 import Order from './order';
+import Main from './main';
 
 export interface IRoutesProps extends React.Props<any> { }
 export class Routes extends React.Component<IRoutesProps, any> {
@@ -21,6 +22,7 @@ export class Routes extends React.Component<IRoutesProps, any> {
                 <AppWrap data-test-id="mainContent">
                     <Shell />
                     <Switch>
+                        <Route exact path={routes.main} component={Main} />
                         <Route path={routes.decide} component={Decide} />
                         <Route path={routes.addobj} component={Asset} />
                         <Route path={routes.addorder} component={Order} />
@@ -42,6 +44,6 @@ const AppWrap = styled.div`
     height: 100vh;
     overflow: hidden;
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     align-items: stretch;
 `;
