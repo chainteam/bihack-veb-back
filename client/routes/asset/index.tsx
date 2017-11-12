@@ -1,7 +1,7 @@
 import { connect } from 'react-redux';
 
 import Comp from './component';
-import { saveAsset } from './action/addasset';
+import { saveAsset } from './action';
 
 const mapStateToProps = (state) => ({
 

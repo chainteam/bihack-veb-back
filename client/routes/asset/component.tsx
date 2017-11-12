@@ -16,12 +16,8 @@ export default class Asset extends React.Component<Prop, {}> {
             owner,
             value,
         }).then((data) => {
-            info(data.guid);
+            info(data.Id);
         });
-    }
-
-    showGuid() {
-
     }
 
     render() {
@@ -52,7 +48,7 @@ function info(guid) {
         title: 'Add asset',
         content: (
             <div>
-                <p>Guid: {guid}</p>
+                <p>Id: {guid}</p>
             </div>
         ),
         onOk() { },

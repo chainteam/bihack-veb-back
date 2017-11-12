@@ -1,35 +1,65 @@
 import * as React from 'react';
 import styled from 'styled-components';
 
-export default class AssetView extends React.Component<{}, {}> {
+interface IAsset {
+    Guid?: string;
+    Title: string;
+    Name: string;
+    Value: number;
+    Status: string;
+}
+
+interface Props {
+    asset: IAsset;
+}
+
+export default class AssetView extends React.Component<Props, {}> {
     render() {
+        const { asset } = this.props;
+
         return (
             <Wrapper>
                 <table>
                     <tbody>
                         <tr>
                             <Name>
-                                Title
-                        </Name>
+                                Guid
+                            </Name>
                             <Value>
-                                Моя хатка с краю
-                        </Value>
+                                {asset.Guid}
+                            </Value>
+                        </tr>
+                        <tr>
+                            <Name>
+                                Status
+                            </Name>
+                            <Value>
+                                {asset.Status}
+                            </Value>
+                        </tr>
+                        <tr>
+                            <Name>
+                                Title
+                            </Name>
+                            <Value>
+                                {asset.Title}
+                            </Value>
                         </tr>
                         <tr>
                             <Name>
                                 Owner
-                        </Name>
+                            </Name>
                             <Value>
-                                Васька
-                        </Value>
+                                {asset.Name}
+                            </Value>
                         </tr>
                         <tr>
                             <Name>
                                 Value
-                        </Name>
+                            </Name>
                             <Value>
-                                100000
-                        </Value>
+                                {asset.Value}
+                            </Value>
                         </tr>
                     </tbody>
                 </table>

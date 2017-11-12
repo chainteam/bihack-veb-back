@@ -4,7 +4,7 @@ import { FormComponentProps } from 'antd/lib/form/Form';
 const FormItem = Form.Item;
 
 interface ILoginForm extends FormComponentProps {
-    submit?: (formObject: {guid: string}) => void;
+    submit?: (formObject: {id: string}) => void;
 }
 
 class NormalLoginForm extends React.Component<ILoginForm, any> {
@@ -21,10 +21,10 @@ class NormalLoginForm extends React.Component<ILoginForm, any> {
         return (
             <Form onSubmit={this.handleSubmit} className="login-form">
                 <FormItem>
-                    {getFieldDecorator('guid', {
+                    {getFieldDecorator('id', {
                         rules: [{ required: true, message: 'Please input Guid!' }],
                     })(
-                        <Input prefix={<Icon type="star" style={{ fontSize: 13 }} />} placeholder="Guid" />
+                        <Input prefix={<Icon type="star" style={{ fontSize: 13 }} />} placeholder="Id" />
                         )}
                 </FormItem>
                 <FormItem>

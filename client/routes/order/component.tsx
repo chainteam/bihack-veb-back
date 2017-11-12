@@ -3,42 +3,49 @@ import styled from 'styled-components';
 import { Modal, Steps } from 'antd';
 const Step = Steps.Step;
 
-import Guid from './guid';
-import { AssetForm, AssetView } from '../../components';
+import { AssetForm, AssetView, IdForm } from '../../components';
 
 interface Prop {
-    saveAsset: (data) => Promise<any>;
+    getAsset: (guid) => Promise<any>;
+    saveOrder: (order) => Promise<any>;
 }
 
 interface State {
     step: number;
+    asset: any;
 }
 
 export default class Asset extends React.Component<Prop, State> {
 
     state = {
-        step: 0
+        step: 0,
+        asset: null,
     }
 
     onSubmit = ({ title, owner, value }) => {
-        this.props.saveAsset({
+        this.props.saveOrder({
             title,
             owner,
             value,
         }).then((data) => {
-            info(data.guid);
+            info('Order added');
         });
     }
 
-    onGetGuid = ({ guid }) => {
-        console.log(guid);
-        this.setState({ step: 1 });
+    onGetGuid = ({ id }) => {
+        this.props.getAsset(id)
+            .then((asset) => {
+                this.setState({ 
+                    asset,
+                    step: 1, 
+                });
+            })
     }
 
     guidRender() {
         if (this.state.step === 0) {
             return (
-                <Guid
+                <IdForm
                     submit={this.onGetGuid}
                 />
             );
@@ -48,8 +55,12 @@ export default class Asset extends React.Component<Prop, State> {
     formRender() {
         if (this.state.step === 1) {
             return [
-                <AssetView/>,
+                <AssetView
+                    key={0}
+                    asset={this.state.asset}
+                />,
                 <AssetForm
+                    key={1}
                     submit={this.onSubmit}
                 />,
             ]
@@ -86,12 +97,12 @@ const Title = styled.h1`
     color; #666;
 `;
 
-function info(guid) {
+function info(msg) {
     Modal.info({
         title: 'Add asset',
         content: (
             <div>
-                <p>Guid: {guid}</p>
+                <p>{msg}</p>
             </div>
         ),
         onOk() { },
