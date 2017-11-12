@@ -1,8 +1,5 @@
-import axois from 'axios';
+import { addAssetApi } from '../../../api';
 
-export const saveAsset = (data) => (dispatch) => {
-    return axois.post('/api/addasset', data)
-        .then(response => {
-            return response.data;
-        });
+export const saveAsset = (order) => (dispatch) => {
+    return addAssetApi(order);
 }

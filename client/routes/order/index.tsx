@@ -9,7 +9,7 @@ const mapStateToProps = (state) => ({
 })
 
 const mapDispatchToProps = (dispatch) => ({
-    getAsset: (guid) => dispatch(getAsset(guid)),
+    getAsset: (id) => dispatch(getAsset(id)),
     saveOrder: (order) => dispatch(saveOrder(order)),
 });
 

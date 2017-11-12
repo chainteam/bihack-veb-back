@@ -1,15 +1,9 @@
-import axois from 'axios';
+import { addOrderApi, getAssetApi } from '../../../api';
 
-export const getAsset = (guid) => (dispatch) => {
-    return axois.post('/api/getasset', {guid})
-        .then(response => {
-            return response.data;
-        });
+export const getAsset = (id) => (dispatch) => {
+    return getAssetApi(id);
 }
 
 export const saveOrder = (order) => (dispatch) => {
-    return axois.post('/api/addorder', order)
-        .then(response => {
-            return response.data;
-        });
+    return addOrderApi(order);
 }

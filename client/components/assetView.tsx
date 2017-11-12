@@ -1,16 +1,8 @@
 import * as React from 'react';
 import styled from 'styled-components';
 
-interface IAsset {
-    Guid?: string;
-    Title: string;
-    Name: string;
-    Value: number;
-    Status: string;
-}
-
 interface Props {
-    asset: IAsset;
+    asset: IApp.IAsset;
 }
 
 export default class AssetView extends React.Component<Props, {}> {
@@ -23,10 +15,10 @@ export default class AssetView extends React.Component<Props, {}> {
                     <tbody>
                         <tr>
                             <Name>
-                                Guid
+                                Id
                             </Name>
                             <Value>
-                                {asset.Guid}
+                                {asset.Id}
                             </Value>
                         </tr>
                         <tr>
@@ -50,7 +42,7 @@ export default class AssetView extends React.Component<Props, {}> {
                                 Owner
                             </Name>
                             <Value>
-                                {asset.Name}
+                                {asset.Owner}
                             </Value>
                         </tr>
                         <tr>

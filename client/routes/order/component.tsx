@@ -12,7 +12,7 @@ interface Prop {
 
 interface State {
     step: number;
-    asset: any;
+    asset: IApp.IAsset;
 }
 
 export default class Asset extends React.Component<Prop, State> {
@@ -27,6 +27,7 @@ export default class Asset extends React.Component<Prop, State> {
             title,
             owner,
             value,
+            parentId: this.state.asset.Id
         }).then((data) => {
             info('Order added');
         });
@@ -34,9 +35,9 @@ export default class Asset extends React.Component<Prop, State> {
 
     onGetGuid = ({ id }) => {
         this.props.getAsset(id)
-            .then((asset) => {
+            .then((data) => {
                 this.setState({ 
-                    asset,
+                    asset: data.asset,
                     step: 1, 
                 });
             })

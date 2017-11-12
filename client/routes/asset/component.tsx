@@ -43,12 +43,12 @@ const Title = styled.h1`
     color; #666;
 `;
 
-function info(guid) {
+function info(id) {
     Modal.info({
         title: 'Add asset',
         content: (
             <div>
-                <p>Id: {guid}</p>
+                <p>Id: {id}</p>
             </div>
         ),
         onOk() { },

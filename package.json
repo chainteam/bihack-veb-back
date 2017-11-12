@@ -5,6 +5,7 @@
   "main": "index.js",
   "scripts": {
     "build": "cross-env NODE_ENV=production webpack",
+    "server:prod": "cross-env NODE_ENV=production ts-node server/prod",
     "server:dev": "cross-env NODE_ENV=development ts-node server/dev",
     "server:dev-vs-code-debug": "cross-env NODE_ENV=development ts-node --inspect-brk=5858 server/dev"
   },
